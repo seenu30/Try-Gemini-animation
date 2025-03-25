@@ -1,0 +1,80 @@
+body {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.star {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    fill: #E2E2E2;
+    transition: transform 0.8s ease, fill 0s ease;
+}
+
+div:hover .star {
+    transform: translate(-50%, -50%) rotate(180deg);
+    fill: black;
+    transition: transform 0.8s ease, fill 0.8s ease 0.3s;
+}
+
+.circle {
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+    clip-path: circle(50%);
+    background: linear-gradient(90deg, rgba(84,131,233,1) 0%, rgba(144,127,227,1) 45%, rgba(227,127,218,1) 86%, rgba(144,127,227,1) 100%);
+    text-align: center;
+    background-size: 300% 300%;
+    color: white;
+    font-weight: bold;
+    position: relative;
+    transform: scale(0);
+    transition: transform 0.5s ease-in-out, clip-path 0.5s ease-in-out;
+}
+
+/* On hover, reveal and animate */
+div:hover .circle {
+    transform: scale(1);
+    animation: moveGradient 2s ease infinite, rotate 10s linear infinite, 
+    morph 5s infinite linear;
+}
+
+/* Shape Morphing Animation */
+@keyframes morph {
+    0% {
+        clip-path: circle(50%);
+    }
+    25% {
+        clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%); /* Hexagon with rounded edges */
+    }
+    50% {
+        clip-path: inset(10% 5% 10% 5% round 38px); /* Rounded Rectangle */
+    }
+    75%{
+        clip-path: path("M 27.6098 4.26994 C 25.5298 2.52216 23.6532 2 22 2 C 20.3468 2 17.9752 3.25722 17.1477 3.71292 C 14.6671 5.66123 14.9184 5.22394 11.78 5.91158 C 6.86436 6.92829 6.17203 10.5721 5.66148 13.0857 C 5.16061 15.5734 4.43913 16.4746 3.21337 18.3199 C 0.539001 22.5834 3.02292 25.9096 3.99 27.2196 C 4.93099 28.4618 5.51476 29.2319 5.98559 32.2661 C 6.46033 35.3041 9.62025 38.3961 12.2446 38.4753 C 14.8149 38.5297 16.8248 39.921 18.4786 41.0351 C 20.1325 42.1492 24.1233 42.4324 26.0499 40.9262 C 28.0596 39.3865 28.7896 38.6815 32.3089 38.1705 C 35.9036 37.5834 37.9905 34.4449 38.2944 31.8307 C 38.5483 29.7176 39.6869 27.5877 40.2069 26.6753 C 41.3956 25.0157 43.1674 21.0909 40.7675 17.7648 C 36.901 12.7784 39.554 12.3761 36.777 8.5962 C 33.9513 4.76744 30.2111 6.45525 27.6098 4.26994 Z");
+    }
+    100% {
+        clip-path: circle(50%);
+    }
+}
+
+/* Rotation Animation */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Gradient Animation */
+@keyframes moveGradient {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
